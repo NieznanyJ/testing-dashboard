@@ -11,7 +11,6 @@ import type {
 import type { TestResult as AppTestResult } from '@/types/test-result';
 import { getArtifacts, mapStatus } from '@/lib/playwright-report-mapper';
 import stripAnsi from 'strip-ansi';
-import { broadcast } from '@/lib/run-events';
 
 async function broadcastRun(run: TestRun) {
   await fetch('http://localhost:3000/api/run-events', {
@@ -43,7 +42,7 @@ class TestOpsReporter implements Reporter {
   }
 
   async onBegin(config: FullConfig, suite: Suite): void {
-    console.log('>>>>>>>>>>>>>>>>>>>>run started');
+    console.log('>>>>>>>>>>>>>>>>>>>>run started >>> on project ' + this.run.projectId);
     this.run.total = suite.allTests().length;
     await addTestRun(this.run);
 

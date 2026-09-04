@@ -97,7 +97,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 568,
+                      "duration": 679,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -105,14 +105,14 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 311
+                          "duration": 392
                         },
                         {
                           "title": "Then the dashboard should be visible",
-                          "duration": 46
+                          "duration": 43
                         }
                       ],
-                      "startTime": "2026-09-02T10:47:16.222Z",
+                      "startTime": "2026-09-03T19:20:31.962Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -158,7 +158,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "timedOut",
-                      "duration": 30119,
+                      "duration": 30131,
                       "error": {
                         "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
                         "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
@@ -182,11 +182,11 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 307
+                          "duration": 391
                         },
                         {
                           "title": "Then the dashboard should be not visible",
-                          "duration": 29684,
+                          "duration": 29620,
                           "error": {
                             "message": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n",
                             "stack": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:14:67)\n    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:8:5",
@@ -199,7 +199,7 @@
                           }
                         }
                       ],
-                      "startTime": "2026-09-02T10:47:16.222Z",
+                      "startTime": "2026-09-03T19:20:31.948Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -244,7 +244,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 419,
+                      "duration": 536,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -252,14 +252,14 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 227
+                          "duration": 296
                         },
                         {
                           "title": "Then the dashboard should be visible",
-                          "duration": 42
+                          "duration": 57
                         }
                       ],
-                      "startTime": "2026-09-02T10:47:47.486Z",
+                      "startTime": "2026-09-03T19:21:03.305Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -288,7 +288,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "timedOut",
-                      "duration": 30123,
+                      "duration": 30141,
                       "error": {
                         "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
                         "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
@@ -312,11 +312,11 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 249
+                          "duration": 311
                         },
                         {
                           "title": "Then the dashboard should be not visible",
-                          "duration": 29804,
+                          "duration": 29755,
                           "error": {
                             "message": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n",
                             "stack": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:14:67)\n    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:18:5",
@@ -329,7 +329,7 @@
                           }
                         }
                       ],
-                      "startTime": "2026-09-02T10:47:48.030Z",
+                      "startTime": "2026-09-03T19:21:03.983Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -374,7 +374,7 @@
                       "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 531,
+                      "duration": 514,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -382,14 +382,14 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 283
+                          "duration": 268
                         },
                         {
                           "title": "Then the dashboard should be visible",
-                          "duration": 45
+                          "duration": 61
                         }
                       ],
-                      "startTime": "2026-09-02T10:48:19.387Z",
+                      "startTime": "2026-09-03T19:21:35.198Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -409,8 +409,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-09-02T10:47:15.150Z",
-    "duration": 65021.779,
+    "startTime": "2026-09-03T19:20:30.782Z",
+    "duration": 65124.52,
     "expected": 3,
     "skipped": 0,
     "unexpected": 2,

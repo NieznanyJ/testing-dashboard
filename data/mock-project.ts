@@ -7,6 +7,8 @@ export const mockProjects: TestProject[] = [
     repo: 'ecommerce-tests',
     defaultBranch: 'main',
     testCommand: 'npm run test:e2e',
+    createdAt: '2026-08-12T10:30:00Z',
+    runs: [],
   },
   {
     id: 'project-2',
@@ -14,6 +16,8 @@ export const mockProjects: TestProject[] = [
     repo: 'banking-e2e-tests',
     defaultBranch: 'develop',
     testCommand: 'npm run test:e2e',
+    createdAt: '2026-08-19T14:15:00Z',
+    runs: [],
   },
   {
     id: 'project-3',
@@ -21,6 +25,8 @@ export const mockProjects: TestProject[] = [
     repo: 'customer-portal-tests',
     defaultBranch: 'main',
     testCommand: 'npx playwright test',
+    createdAt: '2026-08-25T08:45:00Z',
+    runs: [],
   },
   {
     id: 'project-4',
@@ -28,5 +34,7 @@ export const mockProjects: TestProject[] = [
     repo: 'admin-dashboard-tests',
     defaultBranch: 'main',
     testCommand: 'npm run test:e2e',
+    createdAt: '2026-09-01T16:20:00Z',
+    runs: [],
   },
 ];
