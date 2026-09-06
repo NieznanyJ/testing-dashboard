@@ -1,4 +1,6 @@
 import { addTestRun, updateTestRun } from '@/lib/test-results';
+import { createRun, updateRun } from '@/lib/prisma';
+import { db } from '@/src/prisma/db';
 import { TestRun } from '@/types/test-run';
 import type {
   FullConfig,
@@ -11,6 +13,7 @@ import type {
 import type { TestResult as AppTestResult } from '@/types/test-result';
 import { getArtifacts, mapStatus } from '@/lib/playwright-report-mapper';
 import stripAnsi from 'strip-ansi';
+import { archiveArtifacts } from '@/lib/artifact-storage';
 
 async function broadcastRun(run: TestRun) {
   await fetch('http://localhost:3000/api/run-events', {
@@ -24,11 +27,44 @@ async function broadcastRun(run: TestRun) {
 
 class TestOpsReporter implements Reporter {
   private run: TestRun;
+  private writeQueue: Promise<void> = Promise.resolve();
+
+  private saveRun(create = false) {
+    const snapshot = structuredClone(this.run);
+    this.writeQueue = this.writeQueue.then(async () => {
+      if (create) {
+        await createRun(snapshot);
+        await addTestRun(snapshot);
+      } else {
+        await updateRun(snapshot.id, {
+          status: snapshot.status,
+          finishedAt: snapshot.finishedAt,
+          duration: snapshot.duration,
+          passed: snapshot.passed,
+          failed: snapshot.failed,
+          skipped: snapshot.skipped,
+          total: snapshot.total,
+          files: snapshot.files,
+        });
+        await updateTestRun(snapshot);
+      }
+      await broadcastRun(snapshot).catch((error: unknown) => {
+        console.error('Failed to broadcast TestOps run:', error);
+      });
+    });
+    // Playwright does not await onBegin/onTestEnd; onEnd drains this queue.
+    void this.writeQueue.catch(() => {});
+    return this.writeQueue;
+  }
 
   constructor() {
+    const projectId = process.env.TESTOPS_PROJECT_ID;
+    if (!projectId) {
+      throw new Error('Set TESTOPS_PROJECT_ID to an existing project ID before running tests.');
+    }
     this.run = {
       id: crypto.randomUUID(),
-      projectId: process.env.TESTOPS_PROJECT_ID ?? 'local',
+      projectId,
       branch: 'local',
       commitSha: 'local',
       status: 'running',
@@ -41,21 +77,11 @@ class TestOpsReporter implements Reporter {
     };
   }
 
-  async onBegin(config: FullConfig, suite: Suite): void {
-    console.log('>>>>>>>>>>>>>>>>>>>>run started >>> on project ' + this.run.projectId);
+  onBegin(_config: FullConfig, suite: Suite) {
     this.run.total = suite.allTests().length;
-    await addTestRun(this.run);
-
-    await fetch('http://localhost:3000/api/run-events', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.run),
-    });
+    void this.saveRun(true);
   }
-
-  async onTestBegin(test: TestCase, result: TestResult): void {
+  onTestBegin(test: TestCase) {
     console.log(`>>>>>>>>>>>>${test.title} running`);
     const testResult: AppTestResult = {
       id: test.id,
@@ -73,14 +99,16 @@ class TestOpsReporter implements Reporter {
     if (fileIndex === -1) {
       this.run.files.push(file);
     } else {
-      this.run.files[fileIndex].tests.push(testResult);
+      const tests = this.run.files[fileIndex].tests;
+      const existingIndex = tests.findIndex((existingTest) => existingTest.id === test.id);
+      if (existingIndex === -1) tests.push(testResult);
+      else tests[existingIndex] = testResult;
     }
 
-    await updateTestRun(this.run);
-    await broadcastRun(this.run);
+    void this.saveRun();
   }
 
-  async onTestEnd(test: TestCase, result: TestResult) {
+  onTestEnd(test: TestCase, result: TestResult) {
     const file = this.run.files.find((file) =>
       file.tests.some((existingTest) => existingTest.id === test.id),
     );
@@ -90,8 +118,8 @@ class TestOpsReporter implements Reporter {
     if (testResult) {
       testResult.status = mapStatus(result.status);
       testResult.duration = result.duration;
-      testResult.error = result.errors[1]?.message ? stripAnsi(result.errors[1].message) : '';
-      testResult.artifacts = getArtifacts(result);
+      testResult.error = result.errors.map((error) => stripAnsi(error.message ?? '')).join('\n');
+      testResult.artifacts = archiveArtifacts(this.run.id, getArtifacts(result));
     }
 
     const tests = this.run.files.flatMap((file) => file.tests);
@@ -113,8 +141,7 @@ class TestOpsReporter implements Reporter {
     this.run.failed = stats.failed;
     this.run.skipped = stats.skipped;
 
-    await updateTestRun(this.run);
-    await broadcastRun(this.run);
+    void this.saveRun();
   }
 
   async onEnd(result: FullResult) {
@@ -122,8 +149,14 @@ class TestOpsReporter implements Reporter {
     this.run.finishedAt = new Date().toISOString();
     this.run.duration = result.duration;
     this.run.status = result.status === 'passed' ? 'passed' : 'failed';
-    await updateTestRun(this.run);
-    await broadcastRun(this.run);
+    await this.saveRun();
+  }
+  async onExit() {
+    try {
+      await this.writeQueue;
+    } finally {
+      await db.close();
+    }
   }
 }
 

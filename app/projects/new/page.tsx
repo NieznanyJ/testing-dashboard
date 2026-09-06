@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { createProject } from '@/lib/projects';
 import { useProjectsStore } from '@/stores/project-store';
 import {
     ArrowLeft,
@@ -37,22 +38,29 @@ export default function NewProjectPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const projectId = useMemo(() => slugify(name) || 'your-project', [name]);
 
-    function handleSubmit(event: SubmitEvent) {
+    async function handleSubmit(event: SubmitEvent) {
         event.preventDefault();
         setIsSubmitting(true);
-        const id = `${slugify(name)}-${Date.now().toString(36)}`;
 
-        addProject({
-            id,
-            name: name.trim(),
-            repo: repository.trim(),
-            defaultBranch: defaultBranch.trim(),
-            testCommand: testCommand.trim(),
-            createdAt: new Date().toISOString(),
-            runs: [],
-        });
-        setCurrentProject(id);
-        router.push(`/projects/${id}/runs`);
+        try {
+            const project = await createProject({
+                name: name.trim(),
+                repo: repository.trim(),
+                defaultBranch: defaultBranch.trim(),
+                testCommand: testCommand.trim(),
+            });
+
+            addProject({
+                ...project,
+                runs: [],
+            });
+
+            setCurrentProject(project.id);
+            router.push(`/projects/${project.id}/runs`);
+        } catch (error) {
+            console.error(error);
+            setIsSubmitting(false);
+        }
     }
 
     return (
@@ -195,7 +203,7 @@ export default function NewProjectPage() {
                                         <Button type="button" variant="outline" render={<Link href="/" />}>
                                             Cancel
                                         </Button>
-                                        <Button type="submit" disabled={isSubmitting} className="min-w-35">
+                                        <Button type="submit" disabled={isSubmitting} className="min-w-35 hover:cursor-pointer">
                                             {isSubmitting ? <LoaderCircle className="animate-spin" /> : <ArrowRight />}
                                             {isSubmitting ? 'Creating…' : 'Create project'}
                                         </Button>

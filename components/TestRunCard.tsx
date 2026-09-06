@@ -12,8 +12,6 @@ import { Progress } from '@/components/ui/progress';
 
 import { TestRun } from '@/types/test-run';
 import { TestStatusBadge } from './TestStatusBadge';
-import { Button } from './ui/button';
-import { CheckIcon, CopyIcon } from 'lucide-react';
 import CopyButon from './CopyButton';
 
 interface TestRunCardProps {

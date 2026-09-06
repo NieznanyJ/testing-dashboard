@@ -1,6 +1,18 @@
-import { NextResponse } from 'next/server';
-import { mockProjects } from '@/data/mock-project';
+import { getAllProjects } from '@/lib/prisma';
 
 export async function GET() {
-  return NextResponse.json(mockProjects);
+  try {
+    const projects = await getAllProjects();
+
+    return Response.json(
+      projects.map((project) => ({
+        ...project,
+        runs: [],
+      })),
+    );
+  } catch (error) {
+    console.error('GET /api/projects failed:', error);
+
+    return Response.json({ error: 'Failed to load projects' }, { status: 500 });
+  }
 }

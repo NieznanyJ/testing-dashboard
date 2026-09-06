@@ -1,6 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    '/trace-viewer/*': ['./node_modules/playwright-core/lib/vite/traceViewer/**/*'],
+  },
   images: {
     remotePatterns: [
       {

@@ -97,7 +97,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 679,
+                      "duration": 1202,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -105,14 +105,14 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 392
+                          "duration": 633
                         },
                         {
                           "title": "Then the dashboard should be visible",
-                          "duration": 43
+                          "duration": 61
                         }
                       ],
-                      "startTime": "2026-09-03T19:20:31.962Z",
+                      "startTime": "2026-09-05T14:41:06.524Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -123,7 +123,7 @@
               "id": "05642f167b3bf7abe089-f2a6c9b36adb28c00053",
               "file": "tests/features/dashboard.feature.spec.js",
               "line": 6,
-              "column": 7
+              "column": 3
             }
           ]
         }
@@ -158,7 +158,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "timedOut",
-                      "duration": 30131,
+                      "duration": 30265,
                       "error": {
                         "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
                         "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
@@ -170,10 +170,10 @@
                         {
                           "location": {
                             "file": "D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts",
-                            "column": 67,
-                            "line": 14
+                            "column": 6,
+                            "line": 23
                           },
-                          "message": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\tests\\steps\\dashboard.steps.ts:14\n\n\u001b[0m \u001b[90m 12 |\u001b[39m\n \u001b[90m 13 |\u001b[39m \u001b[33mThen\u001b[39m(\u001b[32m'the dashboard should be not visible'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 14 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'fff Test Dashboard'\u001b[39m })\u001b[33m.\u001b[39mwaitFor()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 15 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m\u001b[0m\n\u001b[2m    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:14:67)\u001b[22m\n\u001b[2m    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:8:5\u001b[22m"
+                          "message": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\tests\\steps\\dashboard.steps.ts:23\n\n\u001b[0m\u001b[0m\n\u001b[2m    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:23:6)\u001b[22m\n\u001b[2m    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:8:5\u001b[22m"
                         }
                       ],
                       "stdout": [],
@@ -182,24 +182,24 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 391
+                          "duration": 642
                         },
                         {
                           "title": "Then the dashboard should be not visible",
-                          "duration": 29620,
+                          "duration": 29496,
                           "error": {
                             "message": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n",
-                            "stack": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:14:67)\n    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:8:5",
+                            "stack": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:23:6)\n    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:8:5",
                             "location": {
                               "file": "D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts",
-                              "column": 67,
-                              "line": 14
+                              "column": 6,
+                              "line": 23
                             },
-                            "snippet": "\u001b[90m   at \u001b[39m..\\tests\\steps\\dashboard.steps.ts:14\n\n\u001b[0m \u001b[90m 12 |\u001b[39m\n \u001b[90m 13 |\u001b[39m \u001b[33mThen\u001b[39m(\u001b[32m'the dashboard should be not visible'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 14 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'fff Test Dashboard'\u001b[39m })\u001b[33m.\u001b[39mwaitFor()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 15 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m\u001b[0m"
+                            "snippet": "\u001b[90m   at \u001b[39m..\\tests\\steps\\dashboard.steps.ts:23\n\n\u001b[0m\u001b[0m"
                           }
                         }
                       ],
-                      "startTime": "2026-09-03T19:20:31.948Z",
+                      "startTime": "2026-09-05T14:41:06.525Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -226,7 +226,7 @@
               "id": "d072502f32e4ac34ed4c-b286c61e2a209f8a1df4",
               "file": "tests/features/login.feature.spec.js",
               "line": 6,
-              "column": 7
+              "column": 3
             },
             {
               "title": "Login opens the dashboard 2",
@@ -244,7 +244,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 536,
+                      "duration": 569,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -252,14 +252,14 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 296
+                          "duration": 314
                         },
                         {
                           "title": "Then the dashboard should be visible",
-                          "duration": 57
+                          "duration": 61
                         }
                       ],
-                      "startTime": "2026-09-03T19:21:03.305Z",
+                      "startTime": "2026-09-05T14:41:38.155Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -270,7 +270,7 @@
               "id": "d072502f32e4ac34ed4c-5c1291ea8e2fd2e60474",
               "file": "tests/features/login.feature.spec.js",
               "line": 11,
-              "column": 7
+              "column": 3
             },
             {
               "title": "Login opens the dashboard3",
@@ -288,7 +288,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "timedOut",
-                      "duration": 30141,
+                      "duration": 30273,
                       "error": {
                         "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
                         "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
@@ -300,10 +300,10 @@
                         {
                           "location": {
                             "file": "D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts",
-                            "column": 67,
-                            "line": 14
+                            "column": 6,
+                            "line": 23
                           },
-                          "message": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\tests\\steps\\dashboard.steps.ts:14\n\n\u001b[0m \u001b[90m 12 |\u001b[39m\n \u001b[90m 13 |\u001b[39m \u001b[33mThen\u001b[39m(\u001b[32m'the dashboard should be not visible'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 14 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'fff Test Dashboard'\u001b[39m })\u001b[33m.\u001b[39mwaitFor()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 15 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m\u001b[0m\n\u001b[2m    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:14:67)\u001b[22m\n\u001b[2m    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:18:5\u001b[22m"
+                          "message": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\tests\\steps\\dashboard.steps.ts:23\n\n\u001b[0m\u001b[0m\n\u001b[2m    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:23:6)\u001b[22m\n\u001b[2m    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:18:5\u001b[22m"
                         }
                       ],
                       "stdout": [],
@@ -312,24 +312,24 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 311
+                          "duration": 525
                         },
                         {
                           "title": "Then the dashboard should be not visible",
-                          "duration": 29755,
+                          "duration": 29674,
                           "error": {
                             "message": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n",
-                            "stack": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:14:67)\n    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:18:5",
+                            "stack": "Error: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\u001b[22m\n\n    at Object.<anonymous> (D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts:23:6)\n    at D:\\code\\cloud-test-dashboard\\.features-gen\\tests\\features\\login.feature.spec.js:18:5",
                             "location": {
                               "file": "D:\\code\\cloud-test-dashboard\\tests\\steps\\dashboard.steps.ts",
-                              "column": 67,
-                              "line": 14
+                              "column": 6,
+                              "line": 23
                             },
-                            "snippet": "\u001b[90m   at \u001b[39m..\\tests\\steps\\dashboard.steps.ts:14\n\n\u001b[0m \u001b[90m 12 |\u001b[39m\n \u001b[90m 13 |\u001b[39m \u001b[33mThen\u001b[39m(\u001b[32m'the dashboard should be not visible'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 14 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'fff Test Dashboard'\u001b[39m })\u001b[33m.\u001b[39mwaitFor()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 15 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m\u001b[0m"
+                            "snippet": "\u001b[90m   at \u001b[39m..\\tests\\steps\\dashboard.steps.ts:23\n\n\u001b[0m\u001b[0m"
                           }
                         }
                       ],
-                      "startTime": "2026-09-03T19:21:03.983Z",
+                      "startTime": "2026-09-05T14:41:39.001Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -356,7 +356,7 @@
               "id": "d072502f32e4ac34ed4c-010188023b00ec18043c",
               "file": "tests/features/login.feature.spec.js",
               "line": 16,
-              "column": 7
+              "column": 3
             },
             {
               "title": "Login opens the dashboard 4",
@@ -374,7 +374,7 @@
                       "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 514,
+                      "duration": 636,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -382,14 +382,14 @@
                       "steps": [
                         {
                           "title": "Given I open the dashboard",
-                          "duration": 268
+                          "duration": 356
                         },
                         {
                           "title": "Then the dashboard should be visible",
-                          "duration": 61
+                          "duration": 51
                         }
                       ],
-                      "startTime": "2026-09-03T19:21:35.198Z",
+                      "startTime": "2026-09-05T14:42:10.381Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -400,7 +400,7 @@
               "id": "d072502f32e4ac34ed4c-6518636172fdf63211fc",
               "file": "tests/features/login.feature.spec.js",
               "line": 21,
-              "column": 7
+              "column": 3
             }
           ]
         }
@@ -409,8 +409,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-09-03T19:20:30.782Z",
-    "duration": 65124.52,
+    "startTime": "2026-09-05T14:41:05.206Z",
+    "duration": 66224.61899999999,
     "expected": 3,
     "skipped": 0,
     "unexpected": 2,

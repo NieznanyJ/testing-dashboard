@@ -804,5 +804,275 @@
     ],
     "finishedAt": "2026-09-03T19:21:35.918Z",
     "duration": 65124.52
+  },
+  {
+    "id": "0d3c8f73-c059-42e1-a39a-c5d2da7e8df1",
+    "projectId": "6d31bdb6-0f49-46f9-b570-609a06aa2d95",
+    "branch": "local",
+    "commitSha": "local",
+    "status": "failed",
+    "startedAt": "2026-09-05T14:16:54.925Z",
+    "passed": 3,
+    "failed": 2,
+    "skipped": 0,
+    "total": 5,
+    "files": [
+      {
+        "id": "tests\\features\\login.feature.spec.js",
+        "name": "Login",
+        "tests": [
+          {
+            "id": "d072502f32e4ac34ed4c-b286c61e2a209f8a1df4",
+            "name": "Login opens the dashboard",
+            "status": "failed",
+            "duration": 30591,
+            "error": "Test timeout of 30000ms exceeded.\nError: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\n",
+            "artifacts": [
+              {
+                "type": "screenshot",
+                "name": "screenshot",
+                "url": "test-results\\tests-features-login.feature-Login-Login-opens-the-dashboard-chromium\\test-failed-1.png"
+              },
+              {
+                "type": "trace",
+                "name": "trace",
+                "url": "test-results\\tests-features-login.feature-Login-Login-opens-the-dashboard-chromium\\trace.zip"
+              }
+            ]
+          },
+          {
+            "id": "d072502f32e4ac34ed4c-5c1291ea8e2fd2e60474",
+            "name": "Login opens the dashboard 2",
+            "status": "passed",
+            "duration": 810,
+            "error": "",
+            "artifacts": []
+          },
+          {
+            "id": "d072502f32e4ac34ed4c-010188023b00ec18043c",
+            "name": "Login opens the dashboard3",
+            "status": "failed",
+            "duration": 30521,
+            "error": "Test timeout of 30000ms exceeded.\nError: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\n",
+            "artifacts": [
+              {
+                "type": "screenshot",
+                "name": "screenshot",
+                "url": "test-results\\tests-features-login.featu-a4a8d--Login-opens-the-dashboard3-chromium\\test-failed-1.png"
+              },
+              {
+                "type": "trace",
+                "name": "trace",
+                "url": "test-results\\tests-features-login.featu-a4a8d--Login-opens-the-dashboard3-chromium\\trace.zip"
+              }
+            ]
+          },
+          {
+            "id": "d072502f32e4ac34ed4c-6518636172fdf63211fc",
+            "name": "Login opens the dashboard 4",
+            "status": "passed",
+            "duration": 799,
+            "error": "",
+            "artifacts": []
+          }
+        ]
+      },
+      {
+        "id": "tests\\features\\dashboard.feature.spec.js",
+        "name": "Dashboard",
+        "tests": [
+          {
+            "id": "05642f167b3bf7abe089-f2a6c9b36adb28c00053",
+            "name": "User opens the dashboard",
+            "status": "passed",
+            "duration": 1811,
+            "error": "",
+            "artifacts": []
+          }
+        ]
+      }
+    ],
+    "finishedAt": "2026-09-05T14:18:03.991Z",
+    "duration": 69057.15999999999
+  },
+  {
+    "id": "df01f00d-c685-4510-b40e-e07d68d682e6",
+    "projectId": "e013c11e-c5c5-42f2-b535-e793339c584d",
+    "branch": "local",
+    "commitSha": "local",
+    "status": "failed",
+    "startedAt": "2026-09-05T14:19:23.731Z",
+    "passed": 3,
+    "failed": 2,
+    "skipped": 0,
+    "total": 5,
+    "files": [
+      {
+        "id": "tests\\features\\login.feature.spec.js",
+        "name": "Login",
+        "tests": [
+          {
+            "id": "d072502f32e4ac34ed4c-b286c61e2a209f8a1df4",
+            "name": "Login opens the dashboard",
+            "status": "failed",
+            "duration": 30676,
+            "error": "Test timeout of 30000ms exceeded.\nError: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\n",
+            "artifacts": [
+              {
+                "type": "screenshot",
+                "name": "screenshot",
+                "url": "test-results\\tests-features-login.feature-Login-Login-opens-the-dashboard-chromium\\test-failed-1.png"
+              },
+              {
+                "type": "trace",
+                "name": "trace",
+                "url": "test-results\\tests-features-login.feature-Login-Login-opens-the-dashboard-chromium\\trace.zip"
+              }
+            ]
+          },
+          {
+            "id": "d072502f32e4ac34ed4c-5c1291ea8e2fd2e60474",
+            "name": "Login opens the dashboard 2",
+            "status": "passed",
+            "duration": 886,
+            "error": "",
+            "artifacts": []
+          },
+          {
+            "id": "d072502f32e4ac34ed4c-010188023b00ec18043c",
+            "name": "Login opens the dashboard3",
+            "status": "failed",
+            "duration": 30688,
+            "error": "Test timeout of 30000ms exceeded.\nError: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\n",
+            "artifacts": [
+              {
+                "type": "screenshot",
+                "name": "screenshot",
+                "url": "test-results\\tests-features-login.featu-a4a8d--Login-opens-the-dashboard3-chromium\\test-failed-1.png"
+              },
+              {
+                "type": "trace",
+                "name": "trace",
+                "url": "test-results\\tests-features-login.featu-a4a8d--Login-opens-the-dashboard3-chromium\\trace.zip"
+              }
+            ]
+          },
+          {
+            "id": "d072502f32e4ac34ed4c-6518636172fdf63211fc",
+            "name": "Login opens the dashboard 4",
+            "status": "passed",
+            "duration": 610,
+            "error": "",
+            "artifacts": []
+          }
+        ]
+      },
+      {
+        "id": "tests\\features\\dashboard.feature.spec.js",
+        "name": "Dashboard",
+        "tests": [
+          {
+            "id": "05642f167b3bf7abe089-f2a6c9b36adb28c00053",
+            "name": "User opens the dashboard",
+            "status": "passed",
+            "duration": 2741,
+            "error": "",
+            "artifacts": []
+          }
+        ]
+      }
+    ],
+    "finishedAt": "2026-09-05T14:20:33.193Z",
+    "duration": 69458.472
+  },
+  {
+    "id": "05d409a9-ecd8-4375-b33a-a550239ab269",
+    "projectId": "6d31bdb6-0f49-46f9-b570-609a06aa2d95",
+    "branch": "local",
+    "commitSha": "local",
+    "status": "failed",
+    "startedAt": "2026-09-05T14:41:05.206Z",
+    "passed": 3,
+    "failed": 2,
+    "skipped": 0,
+    "total": 5,
+    "files": [
+      {
+        "id": "tests\\features\\login.feature.spec.js",
+        "name": "Login",
+        "tests": [
+          {
+            "id": "d072502f32e4ac34ed4c-b286c61e2a209f8a1df4",
+            "name": "Login opens the dashboard",
+            "status": "failed",
+            "duration": 30265,
+            "error": "Test timeout of 30000ms exceeded.\nError: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\n",
+            "artifacts": [
+              {
+                "type": "screenshot",
+                "name": "screenshot",
+                "url": ".testops-artifacts/05d409a9-ecd8-4375-b33a-a550239ab269/83742bf8-6d69-4e79-b6bb-2dd8354ade5c.png"
+              },
+              {
+                "type": "trace",
+                "name": "trace",
+                "url": ".testops-artifacts/05d409a9-ecd8-4375-b33a-a550239ab269/f8a83382-71cc-446d-ac16-a0d51443925f.zip"
+              }
+            ]
+          },
+          {
+            "id": "d072502f32e4ac34ed4c-5c1291ea8e2fd2e60474",
+            "name": "Login opens the dashboard 2",
+            "status": "passed",
+            "duration": 569,
+            "error": "",
+            "artifacts": []
+          },
+          {
+            "id": "d072502f32e4ac34ed4c-010188023b00ec18043c",
+            "name": "Login opens the dashboard3",
+            "status": "failed",
+            "duration": 30273,
+            "error": "Test timeout of 30000ms exceeded.\nError: locator.waitFor: Test timeout of 30000ms exceeded.\nCall log:\n  - waiting for getByRole('heading', { name: 'fff Test Dashboard' }) to be visible\n",
+            "artifacts": [
+              {
+                "type": "screenshot",
+                "name": "screenshot",
+                "url": ".testops-artifacts/05d409a9-ecd8-4375-b33a-a550239ab269/4816582e-de85-4c4a-9a84-eabd39abd9df.png"
+              },
+              {
+                "type": "trace",
+                "name": "trace",
+                "url": ".testops-artifacts/05d409a9-ecd8-4375-b33a-a550239ab269/8d4a5605-f89f-4afb-be9d-e4a41613de2b.zip"
+              }
+            ]
+          },
+          {
+            "id": "d072502f32e4ac34ed4c-6518636172fdf63211fc",
+            "name": "Login opens the dashboard 4",
+            "status": "passed",
+            "duration": 636,
+            "error": "",
+            "artifacts": []
+          }
+        ]
+      },
+      {
+        "id": "tests\\features\\dashboard.feature.spec.js",
+        "name": "Dashboard",
+        "tests": [
+          {
+            "id": "05642f167b3bf7abe089-f2a6c9b36adb28c00053",
+            "name": "User opens the dashboard",
+            "status": "passed",
+            "duration": 1202,
+            "error": "",
+            "artifacts": []
+          }
+        ]
+      }
+    ],
+    "finishedAt": "2026-09-05T14:42:11.437Z",
+    "duration": 66224.61899999999
   }
 ]

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getTestRuns } from '@/lib/test-runs';
+import { getProjectById } from '@/lib/prisma';
 
 interface RouteContext {
   params: Promise<{
@@ -11,11 +11,14 @@ interface RouteContext {
 export async function GET(_request: Request, { params }: RouteContext) {
   const { projectId } = await params;
 
-  const runs = await getTestRuns(projectId);
+  try {
+    const project = await getProjectById(projectId);
 
-  if (!runs) {
-    return NextResponse.json({ message: 'Test run not found' }, { status: 404 });
+    if (!project) {
+      return NextResponse.json({ message: 'Project not found' }, { status: 404 });
+    }
+    return NextResponse.json(project);
+  } catch (e) {
+    throw new Error(`Something went wrond -> ${e}`);
   }
-
-  return NextResponse.json(runs);
 }

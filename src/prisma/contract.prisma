@@ -1,0 +1,37 @@
+// use prisma-next
+
+model Project {
+  id            String            @id @default(uuid())
+  name          String
+  repo          String
+  defaultBranch String
+  testCommand   String
+  createdAt     TimestamptzString @default(now())
+}
+
+enum RunStatus {
+  @@type("pg/text@1")
+  pending = "pending"
+  running = "running"
+  passed  = "passed"
+  failed  = "failed"
+}
+
+model Run {
+  id         String             @id @default(uuid())
+  projectId  String
+  project    Project            @relation(fields: [projectId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  status     RunStatus
+  branch     String
+  commitSha  String
+  startedAt  TimestamptzString   @default(now())
+  finishedAt TimestamptzString?
+  duration   Float?
+  passed     Int                @default(0)
+  failed     Int                @default(0)
+  skipped    Int                @default(0)
+  total      Int                @default(0)
+  files      Json
+
+  @@index([projectId])
+}

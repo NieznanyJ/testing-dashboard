@@ -1,14 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { Link } from "lucide-react";
+import ProjectOverview from '@/components/ProjectOverview';
+import { getProjectById, getRunsByProjectId } from '@/lib/prisma';
+import { notFound } from 'next/navigation';
 
-interface ProjectPageProps {
-  params: Promise<{
-    projectId: string;
-  }>;
-}
-
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({ params }: { params: Promise<{ projectId: string }> }) {
   const { projectId } = await params;
-
-  return <Link href={`/projects/${projectId}/runs`}><Button>Runs</Button></Link>
+  const project = await getProjectById(projectId);
+  if (!project) notFound();
+  const runs = await getRunsByProjectId(projectId);
+  // Capture the request time once on the server for consistent initial chart dates.
+  // eslint-disable-next-line react-hooks/purity
+  const now = Date.now();
+  return <ProjectOverview key={projectId} project={project} initialRuns={runs} now={now} />;
 }
