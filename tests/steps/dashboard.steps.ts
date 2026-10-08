@@ -1,6 +1,5 @@
-import { createBdd } from 'playwright-bdd';
+import { Given, Then } from '../support/fixtures';
 
-const { Given, Then } = createBdd();
 
 Given('I open the dashboard', async ({ page }) => {
   await page.goto('/');
