@@ -3,14 +3,17 @@
 import { TestRun } from "@/types/test-run"
 import { TestRunCard } from "./TestRunCard"
 import { useEffect, useState } from "react";
-import { Input } from "./ui/input";
 import StartRunButton from "./StartRunButton";
+import { Spinner } from "./ui/spinner";
 
-// TODO add try catch + loading 
 async function fetchTestRuns(projectId: string): Promise<TestRun[]> {
     const response = await fetch(`/api/projects/${projectId}/runs`);
-    const data = response.json()
-    return data;
+
+    if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    return response.json();
 }
 
 interface LiveTestRunsProps {
@@ -19,14 +22,17 @@ interface LiveTestRunsProps {
 
 export default function LiveTestRuns({ projectId }: LiveTestRunsProps) {
     const [runs, setRuns] = useState<TestRun[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const loadRuns = async () => {
-            const newRuns = await fetchTestRuns(projectId);
-            setRuns(newRuns);
-        };
-
-        loadRuns();
+        fetchTestRuns(projectId)
+            .then((newRuns) => {
+                setRuns(newRuns);
+                setError(null);
+            })
+            .catch(() => setError('Could not load test runs.'))
+            .finally(() => setIsLoading(false));
 
         const source = new EventSource(`/api/projects/${projectId}/runs/stream`);
 
@@ -50,22 +56,28 @@ export default function LiveTestRuns({ projectId }: LiveTestRunsProps) {
         return () => source.close();
     }, [projectId]);
 
-    if (!runs?.length) {
-        return <div>
-            <h1>No runs for this project</h1>
-        </div>
-    }
-
-    const sortedRuns = runs.sort(
+    const sortedRuns = [...runs].sort(
         (a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()
     );
+
     return (
-        <div className="flex flex-col gap-4 md:grid-cols-2 xl:grid-cols-3">
-            <StartRunButton projectId="project-2" />
+        <div className="flex flex-col gap-4 p-8">
+            <div className="flex items-center justify-between">
+                <h1 className="text-2xl font-semibold">Test runs</h1>
+                <StartRunButton projectId={projectId} />
+            </div>
+
+            {isLoading && <Spinner />}
+
+            {error && <p role="alert" className="text-destructive">{error}</p>}
+
+            {!isLoading && !error && sortedRuns.length === 0 && (
+                <p className="text-muted-foreground">No runs for this project yet.</p>
+            )}
+
             {sortedRuns.map((run: TestRun) => (
                 <TestRunCard key={run.id} run={run} />
             ))}
         </div>
     )
 }
-

@@ -15,27 +15,31 @@ import { TestStatus } from '@/types/test-result';
 interface LiveTestRunProps {
     runId: string;
 }
+type StatusFilter = TestStatus | 'all';
+
 async function fetchTestRun(runId: string): Promise<TestRun> {
     const response = await fetch(`/api/runs/${runId}`);
-    const data = response.json()
-    return data;
+
+    if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    return response.json();
 }
 
 
 export default function LiveTestRun({ runId }: LiveTestRunProps) {
     const [run, setRun] = useState<TestRun>();
     const [search, setSearch] = useState<string>('');
-    const [status, setStatus] = useState<TestStatus | null>(null)
+    const [status, setStatus] = useState<StatusFilter>('all')
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
-        const loadRun = async () => {
-            const newRun = await fetchTestRun(runId);
-            setRun(newRun);
-        };
+        fetchTestRun(runId)
+            .then(setRun)
+            .catch(() => setError('Could not load this test run.'));
 
-        loadRun();
-
-        const source = new EventSource(`/api/runs/${runId}/stream`);
+        const source = new EventSource('/api/runs/stream');
 
         source.onmessage = (event) => {
             const updatedRun: TestRun = JSON.parse(event.data);
@@ -52,14 +56,18 @@ export default function LiveTestRun({ runId }: LiveTestRunProps) {
     const completed = run ? run.passed + run.failed + run.skipped : 0;
     const progress = run ? (completed / run.total) * 100 : 0;
 
+    if (error) {
+        return <p role="alert" className="p-8 text-destructive">{error}</p>
+    }
+
     if (!run) {
         return (
             <div className="w-max h-max flex justify-center align-middle"><Spinner /></div>
         )
     }
 
-    const items: { label: string, value: TestStatus | null }[] = [
-        { label: "All", value: null },
+    const items: { label: string, value: StatusFilter }[] = [
+        { label: "All", value: 'all' },
         { label: "Passed", value: 'passed' },
         { label: "Failed", value: 'failed' },
         { label: "Skipped", value: 'skipped' },
@@ -106,7 +114,12 @@ export default function LiveTestRun({ runId }: LiveTestRunProps) {
 
                     <Field className='flex-1'>
                         <FieldLabel htmlFor="select-field-filter">Status</FieldLabel>
-                        <Select items={items} id="select-field-filter">
+                        <Select
+                            items={items}
+                            id="select-field-filter"
+                            value={status}
+                            onValueChange={(value) => setStatus(value ?? 'all')}
+                        >
                             <SelectTrigger className="w-full max-w-48">
                                 <SelectValue />
                             </SelectTrigger>
@@ -114,7 +127,7 @@ export default function LiveTestRun({ runId }: LiveTestRunProps) {
                                 <SelectGroup>
                                     <SelectLabel>Status</SelectLabel>
                                     {items.map((item) => (
-                                        <SelectItem key={item.value} value={item.value} onClick={() => setStatus(item.value)}>
+                                        <SelectItem key={item.value} value={item.value}>
                                             {item.label}
                                         </SelectItem>
                                     ))}
@@ -130,7 +143,7 @@ export default function LiveTestRun({ runId }: LiveTestRunProps) {
                         file.name.toLowerCase().includes(search.toLowerCase())
                     )
                     .filter(file =>
-                        status === null || file.tests.some(test => test.status === status)
+                        status === 'all' || file.tests.some(test => test.status === status)
                     )
                     .map(file => (
                         <TestFileCard
