@@ -25,14 +25,12 @@ async function openTrace(url: string) {
 
 export function TestResultRow({ test }: TestResultRowProps) {
     const [expanded, setExpanded] = useState(false);
-    const [showImage, setShowImage] = useState(false);
 
     const hasDetails =
         test.status === 'failed' &&
         (test.error || (test.artifacts && test.artifacts.length > 0));
 
     async function handleArtifacts(artifact: TestArtifact) {
-        if (artifact.type === 'screenshot') setShowImage(prev => !prev)
         if (artifact.type === 'trace') await openTrace(artifact.url)
     }
 
@@ -90,7 +88,6 @@ export function TestResultRow({ test }: TestResultRowProps) {
 
                                                 <DialogTrigger render={<Button
                                                     className='capitalize'
-                                                    onClick={() => handleArtifacts(artifact)}
                                                     variant="outline"
                                                     size="sm"
                                                 >
@@ -98,6 +95,7 @@ export function TestResultRow({ test }: TestResultRowProps) {
                                                 </Button>} />
 
                                                 <DialogContent className="min-w-6xl max-w-8xl flex flex-col items-start justify-center p-8 pt-10">
+                                                    {/* eslint-disable-next-line @next/next/no-img-element -- served by a local API route */}
                                                     <img
                                                         src={`/api/artifacts/screenshot?path=${encodeURIComponent(artifact.url)}`}
                                                         alt={artifact.name}

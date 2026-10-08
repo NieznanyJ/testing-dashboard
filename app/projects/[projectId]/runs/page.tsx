@@ -1,18 +1,15 @@
-'use client'
-
 import LiveTestRuns from "@/components/LiveTestRuns";
-import { useCurrentProject } from "@/stores/project-store"
-import { notFound } from "next/navigation";
 
-export default function Runs() {
+interface RunsPageProps {
+  params: Promise<{
+    projectId: string;
+  }>;
+}
 
-  const currentProject = useCurrentProject();
-
-  if (!currentProject) {
-    return notFound();
-  }
+export default async function Runs({ params }: RunsPageProps) {
+  const { projectId } = await params;
 
   return (
-    <LiveTestRuns projectId={currentProject?.id} />
+    <LiveTestRuns projectId={projectId} />
   )
 }

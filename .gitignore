@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# playwright / playwright-bdd output
+/.features-gen/
+/test-results/
+/playwright-report/
+
+# runtime data written by the reporter
+/data/test-runs.json

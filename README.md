@@ -2,7 +2,7 @@
 
 A web dashboard for running Playwright tests and watching the results come in live. You start a run from the browser, a custom Playwright reporter streams progress to the UI test by test, and failed tests can be inspected with their error message, screenshot and trace.
 
-> **Status: early work in progress.** The reporter, the live event stream and the UI are written, but some API routes are not finished yet, so the app does not work fully end to end. See [Status and roadmap](#status-and-roadmap).
+> **Status: work in progress.** Starting a run, live progress, the run list and run details work locally. Projects created in the UI are not persisted yet. See [Status and roadmap](#status-and-roadmap).
 
 <!-- TODO: add screenshots here (home page, live run, failed test details), e.g. docs/screenshots/*.png -->
 
@@ -93,23 +93,28 @@ The sample feature files include scenarios that fail on purpose, so that failed 
 | `npm run test:e2e` | Generate specs from Gherkin and run Playwright |
 | `npm run test:e2e:ui` | The same in Playwright UI mode |
 | `npm run lint` | ESLint |
+| `npm run typecheck` | Generate Next.js route types and run `tsc` |
 | `npm run format` / `npm run format:check` | Prettier |
 
 ## Status and roadmap
 
-Working today: the reporter, saving runs to `data/test-runs.json`, the event endpoint and the per-project SSE stream, starting a run through the API, the home page and the new project form.
+Working today: the reporter (branch and commit read from Git, dashboard URL from `TESTOPS_URL`, tests keep running when the dashboard is down), saving runs to `data/test-runs.json`, starting a run from the runs page, live progress over SSE, the run list, run details with search, status filter, error message, screenshot preview and trace viewer.
+
+Tests:
+
+- **Unit and API (Vitest):** report mapping, event pub/sub, artifact path validation, `POST /api/runs/start` validation, and path traversal / command injection attempts on the artifact endpoints.
+- **Components (Vitest + Testing Library):** `TestRunCard`, `TestResultRow`.
+- **E2E (Playwright + playwright-bdd, Page Object Model):** `home.feature`, `new-project.feature`, `live-runs.feature`. Live updates are tested deterministically by posting prepared events to `POST /api/run-events`.
 
 Not finished yet:
 
-- The single-run API (`/api/runs/{id}` and its stream) and the run list endpoint the UI calls, so the run list and run details pages do not load their data yet.
-- Projects come from mock data and an in-memory store; runs are stored in a JSON file. A PostgreSQL + Prisma storage layer is in progress on a separate branch.
-- The real branch and commit are not read from Git yet (`local` placeholder).
+- Projects come from mock data; projects created with the form live only in memory and disappear after a refresh, and runs can be started only for the sample projects. A PostgreSQL + Prisma storage layer is in progress on a separate branch.
+- `tests/features/login.feature` fails on purpose to produce failed results for the dashboard, so `npm run test:e2e` is not green yet. It will move to a separate demo suite.
 - Accepting results from CI (GitHub Actions) in addition to local runs.
-- Unit and E2E coverage is minimal.
 
 ## Note on security
 
-This is a local developer tool. The API starts shell commands and reads artifact files from disk without authentication, so it must not be exposed on a public network in its current form.
+This is a local developer tool without authentication, so it must not be exposed on a public network. Starting a run executes the project's `testCommand` in a shell; that is the purpose of the tool, so only add projects whose command you trust. Artifact endpoints only serve files inside `test-results/`, and the trace viewer is started without a shell.
 
 ## Author
 

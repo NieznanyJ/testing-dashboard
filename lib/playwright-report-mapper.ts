@@ -1,14 +1,19 @@
-import { PlaywrightReport, PlaywrightResult, PlaywrightSuite } from '@/types/playwright-report';
+import {
+  PlaywrightAttachment,
+  PlaywrightError,
+  PlaywrightReport,
+  PlaywrightSuite,
+} from '@/types/playwright-report';
 
 import { TestRun } from '@/types/test-run';
 import { TestFile } from '@/types/test-file';
 import { TestArtifact, TestResult, TestStatus } from '@/types/test-result';
 import stripAnsi from 'strip-ansi';
-import type { TestResult as PlaywrightTestResult } from '@playwright/test/reporter';
 import path from 'path';
 
 interface RunMetadata {
   id: string;
+  projectId: string;
   branch: string;
   commitSha: string;
 }
@@ -26,6 +31,7 @@ export function mapPlaywrightReportToTestRun(
 
   return {
     id: metadata.id,
+    projectId: metadata.projectId,
     status: failed > 0 ? 'failed' : 'passed',
     branch: metadata.branch,
     commitSha: metadata.commitSha,
@@ -58,7 +64,7 @@ function extractTestFiles(suites: PlaywrightSuite[]): TestFile[] {
             name: spec.title,
             status: mapStatus(result?.status),
             duration: result?.duration,
-            error: getError(result),
+            error: formatErrors(result?.errors),
             artifacts: getArtifacts(result),
           };
         }),
@@ -93,19 +99,17 @@ export function mapStatus(status?: string): TestStatus {
   }
 }
 
-function getError(result?: PlaywrightResult): string | undefined {
-  if (!result?.errors?.length) {
-    return undefined;
-  }
-
-  return result.errors
+export function formatErrors(errors?: PlaywrightError[]): string | undefined {
+  const messages = (errors ?? [])
     .map((error) => error.message)
     .filter((message): message is string => Boolean(message))
-    .map((message) => stripAnsi(message))
-    .join('\n');
+    .map((message) => stripAnsi(message));
+
+  return messages.length ? messages.join('\n') : undefined;
 }
 
-export function getArtifacts(result?: PlaywrightTestResult): TestArtifact[] {
+// Accepts both a result from the JSON report and a live reporter result.
+export function getArtifacts(result?: { attachments: PlaywrightAttachment[] }): TestArtifact[] {
   if (!result) {
     return [];
   }

@@ -12,8 +12,6 @@ import { Progress } from '@/components/ui/progress';
 
 import { TestRun } from '@/types/test-run';
 import { TestStatusBadge } from './TestStatusBadge';
-import { Button } from './ui/button';
-import { CheckIcon, CopyIcon } from 'lucide-react';
 import CopyButon from './CopyButton';
 
 interface TestRunCardProps {
@@ -25,7 +23,7 @@ export function TestRunCard({ run }: TestRunCardProps) {
     const progress = (completed / run.total) * 100;
 
     return (
-        <Link href={`/runs/${run.id}`} className="block">
+        <Link href={`/projects/${run.projectId}/runs/${run.id}`} className="block">
             <Card className="h-full transition-shadow hover:shadow-md">
                 <CardHeader>
                     <div className='flex items-center justify-between w-full flex-1'>
@@ -51,7 +49,7 @@ export function TestRunCard({ run }: TestRunCardProps) {
                                     Finished at: {new Date(run.finishedAt).toLocaleString('en-EN')}
                                 </CardDescription>
                             }
-                            {run.duration &&
+                            {run.duration !== undefined &&
                                 <CardDescription>
                                     Duration: {(run.duration / 1000).toFixed(2)}s
 

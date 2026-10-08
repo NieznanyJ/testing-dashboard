@@ -20,7 +20,7 @@ import { useCurrentProject, useProjectsStore } from '@/stores/project-store'
 import { ChevronDown, Plus } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { getProjects } from '@/lib/projects'
 
 type SidebarAction = {
@@ -113,7 +113,10 @@ export default function AppSidebar() {
     const router = useRouter();
     const { projects, setProjects } = useProjectsStore();
 
-    const currentProject = useCurrentProject()
+    // Prefer the project from the URL so the selection survives a page refresh.
+    const { projectId } = useParams<{ projectId?: string }>()
+    const storedProject = useCurrentProject()
+    const currentProject = projects.find((project) => project.id === projectId) ?? storedProject
     const setCurrentProject = useProjectsStore(
         (state) => state.setCurrentProject,
     )

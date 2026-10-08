@@ -11,11 +11,5 @@ interface RouteContext {
 export async function GET(_request: Request, { params }: RouteContext) {
   const { projectId } = await params;
 
-  const runs = await getTestRuns(projectId);
-
-  if (!runs) {
-    return NextResponse.json({ message: 'Test run not found' }, { status: 404 });
-  }
-
-  return NextResponse.json(runs);
+  return NextResponse.json(await getTestRuns(projectId));
 }

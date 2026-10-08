@@ -1,21 +1,23 @@
 import fs from 'fs/promises';
-import path from 'path';
+import { resolveArtifactPath } from '@/lib/artifacts';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const artifactPath = searchParams.get('path');
+  const fullPath = resolveArtifactPath(searchParams.get('path'), '.png');
 
-  if (!artifactPath) {
-    return new Response('Missing path', { status: 400 });
+  if (!fullPath) {
+    return new Response('Invalid screenshot path', { status: 400 });
   }
 
-  const fullPath = path.join(process.cwd(), artifactPath);
+  try {
+    const file = await fs.readFile(fullPath);
 
-  const file = await fs.readFile(fullPath);
-
-  return new Response(file, {
-    headers: {
-      'Content-Type': 'image/png',
-    },
-  });
+    return new Response(file, {
+      headers: {
+        'Content-Type': 'image/png',
+      },
+    });
+  } catch {
+    return new Response('Screenshot not found', { status: 404 });
+  }
 }
